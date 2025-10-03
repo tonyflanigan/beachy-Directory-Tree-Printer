@@ -1,100 +1,16 @@
 {
-  "build": {
-    "beforeBuildCommand": "",
-    "beforeDevCommand": "",
-    "devPath": "../",
-    "distDir": "../"
+  "name": "beachy-directory-tree-printer",
+  "version": "0.1.0",
+  "description": "A beautiful cross-platform directory tree printer",
+  "main": "index.js",
+  "scripts": {
+    "tauri": "tauri",
+    "start": "tauri dev",
+    "build": "tauri build"
   },
-  "package": {
-    "productName": "Beachy Directory Tree Printer",
-    "version": "0.1.0"
-  },
-  "tauri": {
-    "allowlist": {
-      "all": false,
-      "shell": {
-        "all": false,
-        "open": true
-      },
-      "fs": {
-        "all": true,
-        "readFile": true,
-        "writeFile": true,
-        "readDir": true,
-        "copyFile": true,
-        "createDir": true,
-        "removeDir": true,
-        "removeFile": true,
-        "renameFile": true,
-        "exists": true
-      },
-      "path": {
-        "all": true
-      },
-      "os": {
-        "all": true
-      },
-      "dialog": {
-        "all": true
-      }
-    },
-    "bundle": {
-      "active": true,
-      "category": "DeveloperTool",
-      "copyright": "MIT",
-      "deb": {
-        "depends": []
-      },
-      "externalBin": [],
-      "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
-      ],
-      "identifier": "com.tonyflanigan.directory-tree-printer",
-      "longDescription": "A beautiful cross-platform directory tree printer",
-      "macOS": {
-        "frameworks": [],
-        "minimumSystemVersion": "",
-        "useBootstrapper": false
-      },
-      "resources": [],
-      "shortDescription": "Directory Tree Printer",
-      "targets": "all",
-      "windows": {
-        "certificateThumbprint": null,
-        "digestAlgorithm": "sha256",
-        "timestampUrl": "",
-        "webviewInstallMode": {
-          "type": "downloadBootstrapper"
-        },
-        "wix": {
-          "language": "en-US",
-          "template": null,
-          "fragmentPaths": [],
-          "componentGroupRefs": [],
-          "componentRefs": [],
-          "featureGroupRefs": [],
-          "featureRefs": [],
-          "mergeRefs": [],
-          "skipWebviewInstall": false
-        }
-      }
-    },
-    "security": {
-      "csp": null
-    },
-    "windows": [
-      {
-        "fullscreen": false,
-        "height": 800,
-        "resizable": true,
-        "title": "Beachy Directory Tree Printer",
-        "width": 1200,
-        "fileDropEnabled": true
-      }
-    ]
+  "author": "tonyflanigan",
+  "license": "MIT",
+  "devDependencies": {
+    "tauri": "^2.0"
   }
 }
