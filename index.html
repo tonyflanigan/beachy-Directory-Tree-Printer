@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" type="image/png" href="/icons/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
+  <link rel="shortcut icon" href="/icons/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
+  <link rel="manifest" href="/icons/site.webmanifest" />
+  <title>beachy Directory Tree Printer</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      padding: 30px;
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.6;
+      color: #333;
+    }
+    h1 {
+      color: #2c3e50;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 10px;
+    }
+    .form {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    label {
+      font-weight: 500;
+    }
+    input, button, select {
+      margin: 5px;
+      padding: 8px;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    button {
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    button:hover {
+      background: #2980b9;
+    }
+    button:disabled {
+      background: #95a5a6;
+      cursor: not-allowed;
+    }
+    .path-display {
+      font-size: 14px;
+      color: #555;
+      margin: 10px 0;
+      word-break: break-all;
+    }
+    pre {
+      background: #2d2d2d;
+      color: #f8f8f9;
+      padding: 20px;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      line-height: 1.5;
+      white-space: pre;
+    }
+    .actions {
+      margin: 15px 0;
+    }
+    .actions button {
+      margin-right: 10px;
+      background: #27ae60;
+    }
+    .actions button:hover {
+      background: #219653;
+    }
+    .actions #saveBtn {
+      background: #8e44ad;
+    }
+    .actions #saveBtn:hover {
+      background: #7d3c98;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: #aaa;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>📁 beachy Directory Tree Printer</h1>
+  <p>No CLI. No fear. Just pick a folder and get a clean tree.</p>
+
+  <div class="form">
+    <button id="browseBtn">📁 Browse for Folder</button>
+    <div class="path-display" id="pathDisplay">No folder selected</div>
+
+    <div>
+      <label>
+        Depth (0 = unlimited):
+        <input type="number" id="depthInput" value="3" min="0" max="10" />
+      </label>
+    </div>
+    <div>
+      <label>
+        <input type="checkbox" id="includeFiles" checked /> Include Files
+      </label>
+    </div>
+    <button id="generateBtn">▶️ Generate Tree</button>
+  </div>
+
+  <div class="actions">
+    <button id="copyBtn">📋 Copy Tree to Clipboard</button>
+    <button id="saveBtn">💾 Save Tree as .txt</button>
+  </div>
+
+  <pre id="output">Your tree will appear here...</pre>
+
+  <footer>
+    Created with ❤️ — No terminals were harmed in the making of this app.
+  </footer>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
