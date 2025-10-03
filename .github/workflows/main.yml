@@ -1,0 +1,67 @@
+name: Build Tauri App (Multi-Platform)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  # Set the Node.js and Rust versions for consistency across platforms
+  NODE_VERSION: '18'
+  RUST_VERSION: 'stable'
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      # 1. Checkout your repository source code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Node.js for building frontend assets
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      # 3. Set up Rust toolchain for compiling the Tauri backend
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ env.RUST_VERSION }}
+          profile: minimal
+          override: true
+
+      # 4. Install frontend dependencies (adjust if you use yarn/pnpm)
+      - name: Install Node.js dependencies
+        run: npm install
+
+      # 5. (Optional) Build frontend assets if needed
+      #    Uncomment if you use a frontend framework like React/Vue
+      # - name: Build frontend
+      #   run: npm run build
+
+      # 6. Install Tauri CLI (globally)
+      - name: Install Tauri CLI
+        run: cargo install tauri-cli --version "^2.0"
+
+      # 7. Build the Tauri app
+      #    For Windows: set WebView2 install mode to avoid system dependency
+      - name: Build Tauri app
+        run: npm run tauri build
+        env:
+          # On Windows, ensure WebView2 is bundled (no system dependency)
+          TAURI_WINDOWS_WEBVIEW2_INSTALL_MODE: ${{ matrix.os == 'windows-latest' && 'download-bootstrapper' || '' }}
+
+      # 8. Upload the built Tauri bundles as workflow artifacts
+      - name: Upload Tauri bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: tauri-bundle-${{ matrix.os }}
+          path: |
+            src-tauri/target/release/bundle/
